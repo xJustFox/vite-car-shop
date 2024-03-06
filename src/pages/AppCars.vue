@@ -43,11 +43,11 @@ export default {
         <div class="row my-5">
             <div class="d-flex justify-content-center">
                 <div>
-                    <button :class="currentPage == 1 ? 'disabled' : ''" @click=" getCar(currentPage - 1)"
+                    <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
                         class="btn"><i class="fa-solid fa-chevron-left"></i></button>
                 </div>
                 <div>
-                    <button :class="currentPage == lastPage ? 'disabled' : ''" @click="getCar(currentPage + 1)"
+                    <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
                         class="btn"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
             </div>
@@ -60,5 +60,10 @@ export default {
     button{
         background-color: $my_red;
         margin: 0 10px;
+
+        &:hover{
+            opacity: 0.5;
+            background-color: $my_red;
+        }
     }
 </style>

@@ -71,9 +71,13 @@ export default {
         }
 
         button{
-            background-color: $my_black;
-            color: $my_red;
+            background-color: $my_red;
+            color: #fff;
             margin: 10px 0;
+
+            &:hover{
+                opacity: 0.5;
+            }
         }
     }
 </style>
