@@ -3,6 +3,7 @@ export default {
     name: 'AppHeader',
     data() {
         return {
+            flagActive: 0,
             navLinks: [
                 {
                     name: 'home',
@@ -30,6 +31,11 @@ export default {
             ]
         };
     },
+    methods:{
+        getActiveLink(index){
+            this.flagActive = index
+        }
+    }
 }
 </script>
 
@@ -48,7 +54,7 @@ export default {
                 <div class="col d-flex align-items-center justify-content-center ">
                     <ul class="list-unstyled d-flex m-0">
                         <li class="px-2" v-for="link, index in navLinks">
-                            <router-link class="text-decoration-none text-white" :to="{ name: link.name }">{{ link.label }}</router-link>
+                            <router-link :class="this.flagActive == index ? 'active-link' : ''" class="link" :to="{ name: link.name }" @click="getActiveLink(index)">{{ link.label }}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -57,7 +63,7 @@ export default {
                 <div class="col d-flex align-items-center justify-content-end ">
                     <ul class="list-unstyled d-flex m-0 d-lg-flex d-md-flex d-sm-flex d-none">
                         <li class="px-2" v-for="link, index in loginLinks">
-                            <router-link class="text-decoration-none text-white" :to="{ name: link.name }">{{ link.label }}</router-link>
+                            <router-link class="link" :to="{ name: link.name }">{{ link.label }}</router-link>
                         </li>
                     </ul>
                     <div class="dropdown">
@@ -65,7 +71,7 @@ export default {
 
                         <ul class="dropdown-menu">
                             <li v-for="link, index in loginLinks">
-                                <router-link class="text-decoration-none dropdown-item" :to="{ name: link.name }">{{ link.label }}</router-link>
+                                <router-link class="link dropdown-item" :to="{ name: link.name }">{{ link.label }}</router-link>
                             </li>
                         </ul>
                     </div>
@@ -91,4 +97,16 @@ export default {
 
 }
 
+.link{
+    color: white;
+    text-decoration: none;
+
+    &:hover{
+        color: $my_red;
+    }
+}
+
+.active-link{
+    color: $my_red;
+}
 </style>
