@@ -1,14 +1,14 @@
 <script>
-    import CarsCard from '../components/CarsCard.vue';
-    import { store } from '../store.js';
-    import axios from 'axios';
+import CarsCard from '../components/CarsCard.vue';
+import { store } from '../store.js';
+import axios from 'axios';
 
 export default {
     name: 'AppCars',
-    components:{
+    components: {
         CarsCard
     },
-    data(){
+    data() {
         return {
             store,
             cars: [],
@@ -21,9 +21,10 @@ export default {
         this.getCar();
         this.getBrands();
     },
-    methods:{
+    methods: {
         getCar(page) {
-            axios.get(`${this.store.baseUrl}/api/cars`, {
+            this.cars = [];
+            axios.get(`${this.store.baseUrl}/api/cars/brand/${this.$route.params.slug}`, {
                 params: {
                     page: page
                 }
@@ -35,9 +36,11 @@ export default {
         },
         getBrands() {
             axios.get(`${this.store.baseUrl}/api/brands/`).then((response) => {
-                this.brands = response.data.results;
-                console.log(this.brands);
+                this.brands = response.data.results
             })
+        },
+        capitalize(sentence) {
+            return sentence && sentence[0].toUpperCase() + sentence.slice(1);
         }
     }
 }
@@ -49,11 +52,11 @@ export default {
             <div class="col-12 d-flex justify-content-end mt-4">
                 <div class="dropdown-center">
                     <a class="my-dropdown dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Brands
+                        {{capitalize(this.$route.params.slug)}}
                     </a>
                   
                     <ul class="dropdown-menu">
-                        <li v-for="(brand, index) in brands" :key="index">
+                        <li v-for="(brand, index) in brands" :key="index" @click="getCar(page)">
                             <router-link class="my-dropdown-link" :to="{ name: 'brand-cars', params: { slug: brand.slug } }">{{brand.name}}</router-link> 
                         </li>
                     </ul>
@@ -79,41 +82,41 @@ export default {
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
 
-    button{
+button {
+    background-color: $my_red;
+    margin: 0 10px;
+
+    &:hover {
+        opacity: 0.5;
         background-color: $my_red;
-        margin: 0 10px;
-
-        &:hover{
-            opacity: 0.5;
-            background-color: $my_red;
-        }
     }
+}
 
-    .my-dropdown{
-        font-size: large;
+.my-dropdown {
+    font-size: large;
+    text-decoration: none;
+    color: black;
+    border: 1px solid $my_red;
+    border-radius: 5px;
+    padding: 5px;
+
+    &:hover {
+        color: $my_red;
+    }
+}
+
+.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
+
+    .my-dropdown-link {
         text-decoration: none;
         color: black;
-        border: 1px solid $my_red;
-        border-radius: 5px;
-        padding: 5px;
+        padding: 0 10px;
 
-        &:hover{
+        &:hover {
             color: $my_red;
         }
     }
-
-    .dropdown-menu{
-        height: 300px;
-        overflow-y: scroll;
-
-        .my-dropdown-link{
-            text-decoration: none;
-            color: black;
-            padding: 0 10px;
-
-            &:hover{
-                color: $my_red;
-            }
-        }
-    }
+}
 </style>

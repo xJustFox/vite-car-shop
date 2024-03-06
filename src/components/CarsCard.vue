@@ -27,24 +27,24 @@ export default {
 </script>
 
 <template lang="">
-        <div class="col-4 mt-5">
+        <div class="col-4 mt-4">
             <div class="card h-100">
                 <img :src="getImage()" alt="" class="card-img-top">
                 <div class="card-body">
                     <h4 class="text-center text-capitalize">{{car.model}}</h4>
                     <p v-if="car.brand != null" class="text-center my-grey">{{car.brand.name}}</p>
                 </div>
-                <ul class="list-unstyled d-flex justify-content-between mx-3 p-1">
+                <ul class="list-unstyled d-flex justify-content-center mx-3 p-1">
                     <li>
-                        <i class="fa-solid fa-calendar"></i>
+                        <i class="fa-solid fa-calendar my-color"></i>
                         {{car.year}}
                     </li>
-                    <li>
-                        <i class="fa-solid fa-gauge-high"></i>
+                    <li class="px-4">
+                        <i class="fa-solid fa-gauge-high my-color"></i>
                         {{car.kilometers}} Km
                     </li>
                     <li class="text-capitalize">
-                        <i class="fa-solid fa-gas-pump"></i>
+                        <i class="fa-solid fa-gas-pump my-color"></i>
                         {{car.fuel_type}}
                     </li>
                 </ul>
@@ -62,12 +62,19 @@ export default {
     @use '../style/partials/variables' as *;
 
     .card{
+        .card-img-top{
+            height: 300px;
+        }
         ul{
             background-color: #f5f5f5;
         }
 
         .my-grey{
             color: #b2b2b2;
+        }
+
+        .my-color{
+            color: $my_red;
         }
 
         button{
