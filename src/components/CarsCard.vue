@@ -53,7 +53,9 @@ export default {
                     <span>{{car.price}} €</span>
                 </div>
                 <hr class="mx-3">
-                <button class="mx-3 btn text-uppercase">dettaglio prodotto</button>
+                <router-link :to="{name: 'details-car', params: {slug: car.slug}}" class="mx-3 d-flex justify-content-center text-decoration-none">
+                    <button class="btn text-uppercase">dettaglio prodotto</button>
+                </router-link>
             </div>
         </div>
 </template>
