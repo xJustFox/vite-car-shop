@@ -39,23 +39,26 @@ export default {
                 <div class="col-4 d-flex py-5">
                     <div class="col-6 text-white">
                         <h5>Services</h5>
+                        <hr class="hr_footer">
                         <ul class="list-unstyled">
-                            <li><a class="text-decoration-none text-white" href="#">Terms & Conditions</a></li>
-                            <li><a class="text-decoration-none text-white" href="#">Privacy Policy</a></li>
-                            <li><a class="text-decoration-none text-white" href="#">Design</a></li>
-                            <li><a class="text-decoration-none text-white" href="#">Development</a></li>
+                            <li><a class="text-decoration-none" href="#">Terms & Conditions</a></li>
+                            <li><a class="text-decoration-none" href="#">Privacy Policy</a></li>
+                            <li><a class="text-decoration-none" href="#">Design</a></li>
+                            <li><a class="text-decoration-none" href="#">Development</a></li>
                         </ul>
-                        <h5>Contact Us</h5>
-                        <ul class="list-unstyled text-white">
-                            <li><a class="text-decoration-none text-white" href="#">Email</a></li>
-                            <li><a class="text-decoration-none text-white" href="#">Location</a></li>
+                        <h5 class="mt-5">Contact Us</h5>
+                        <hr class="hr_footer">
+                        <ul class="list-unstyled">
+                            <li><a class="text-decoration-none" href="#">Email</a></li>
+                            <li><a class="text-decoration-none" href="#">Location</a></li>
                         </ul>
                     </div>
                     <div class="col-6 text-white">
                         <h5>Site</h5>
+                        <hr class="hr_footer">
                         <ul class="list-unstyled text-white">
                             <li v-for="link, index in footerLinks">
-                                <router-link class="text-decoration-none text-white" :to="{ name: link.name }">{{ link.label }}</router-link>
+                                <router-link class="text-decoration-none" :to="{ name: link.name }">{{ link.label }}</router-link>
                             </li>
                         </ul>
                     </div>
@@ -63,17 +66,17 @@ export default {
 
                 <!-- Subscribe section -->
                 <div class="col-4 d-flex justify-content-end py-5 text-white">
-                    <div class="">
+                    <div>
                         <h5>Get in touch</h5>
                         <div class="my-3">
                             <a class="text-white" href="">
-                                <i class="fab fa-facebook border rounded-5 border-white p-2 me-2"></i>
+                                <i class="fab fa-facebook p-2 me-2"></i>
                             </a>
                             <a class="text-white" href="">
-                                <i class="fab fa-twitter border rounded-5 border-white p-2 me-2"></i>
+                                <i class="fab fa-twitter p-2 me-2"></i>
                             </a>
                             <a class="text-white" href="">
-                                <i class="fab fa-linkedin-in border rounded-5 border-white p-2 me-2"></i>
+                                <i class="fab fa-linkedin-in p-2 me-2"></i>
                             </a>
                         </div>
                         <div class="mt-5">
@@ -112,6 +115,24 @@ footer{
     .sub_btn{
         background-color: $my_red;
         border-color: $my_red;
+    }
+
+    i{
+        border: 1px solid;
+        border-radius: 50%;
+    }
+
+    a, i{
+        color: white;
+        text-decoration: none;
+
+        &:hover{
+            color: $my_red;
+        }
+    }
+
+    .hr_footer{
+        width: 50%;
     }
 }
 
