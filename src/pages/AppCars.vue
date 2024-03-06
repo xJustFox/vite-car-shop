@@ -58,6 +58,7 @@ export default {
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
     button{
-        background-color: $my_red
+        background-color: $my_red;
+        margin: 0 10px;
     }
 </style>

@@ -28,15 +28,52 @@ export default {
 
 <template lang="">
         <div class="col-4 mt-5">
-            <div class="card">
+            <div class="card h-100">
                 <img :src="getImage()" alt="" class="card-img-top">
                 <div class="card-body">
                     <h4 class="text-center text-capitalize">{{car.model}}</h4>
+                    <p v-if="car.brand != null" class="text-center my-grey">{{car.brand.name}}</p>
                 </div>
+                <ul class="list-unstyled d-flex justify-content-between mx-3 p-1">
+                    <li>
+                        <i class="fa-solid fa-calendar"></i>
+                        {{car.year}}
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-gauge-high"></i>
+                        {{car.kilometers}} Km
+                    </li>
+                    <li class="text-capitalize">
+                        <i class="fa-solid fa-gas-pump"></i>
+                        {{car.fuel_type}}
+                    </li>
+                </ul>
+                <div class="d-flex justify-content-between align-items-center mt-3 mx-3">
+                    <span class="text-uppercase my-grey fs-3">Price:</span>
+                    <span>{{car.price}} €</span>
+                </div>
+                <hr class="mx-3">
+                <button class="mx-3 btn text-uppercase">dettaglio prodotto</button>
             </div>
         </div>
 </template>
 
-<style lang="scss">
-    
+<style lang="scss" scoped>
+    @use '../style/partials/variables' as *;
+
+    .card{
+        ul{
+            background-color: #f5f5f5;
+        }
+
+        .my-grey{
+            color: #b2b2b2;
+        }
+
+        button{
+            background-color: $my_black;
+            color: $my_red;
+            margin: 10px 0;
+        }
+    }
 </style>
