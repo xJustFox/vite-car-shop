@@ -36,7 +36,7 @@ export default {
 <template>
 
     <div class="hr_bg">
-        <div class="container">
+        <div class="container-fluid px-5">
             <div class="row">
 
                 <!-- Logo section -->
@@ -45,7 +45,7 @@ export default {
                 </div>
 
                 <!-- Navbar section -->
-                <div class="col d-flex d-lg-flex d-md-flex d-sm-flex d-flex align-items-center justify-content-center ">
+                <div class="col d-flex align-items-center justify-content-center ">
                     <ul class="list-unstyled d-flex m-0">
                         <li class="px-2" v-for="link, index in navLinks">
                             <router-link class="text-decoration-none text-white" :to="{ name: link.name }">{{ link.label }}</router-link>
@@ -65,7 +65,6 @@ export default {
 
                         <ul class="dropdown-menu">
                             <li v-for="link, index in loginLinks">
-                                <!-- <a class="dropdown-item" href="#">Action</a> -->
                                 <router-link class="text-decoration-none dropdown-item" :to="{ name: link.name }">{{ link.label }}</router-link>
                             </li>
                         </ul>
@@ -79,9 +78,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use '../style/partials/variables' as *;
 
 .hr_bg{
-    background-color: #161d20;
+    background-color: $my_black;
     height: 80px;
 
     .img_logo{
