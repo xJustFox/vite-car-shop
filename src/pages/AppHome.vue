@@ -77,11 +77,11 @@ export default {
 @use '../style/partials/variables' as *;
 
 .jumbo_bg{
+    height: calc(100vh - 80px);
     background-color: $my_black;
     background-image: url(../assets/vpxzypif90gfhivkwteo.avif);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 800px;
     border-bottom: 3px solid $my_black;
     
     h1{

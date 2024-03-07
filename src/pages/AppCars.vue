@@ -36,7 +36,6 @@ export default {
         getBrands() {
             axios.get(`${this.store.baseUrl}/api/brands/`).then((response) => {
                 this.brands = response.data.results;
-                console.log(this.brands);
             })
         }
     }
