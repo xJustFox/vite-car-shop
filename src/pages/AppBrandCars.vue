@@ -62,25 +62,63 @@ export default {
                     </ul>
                 </div>
             </div>
-            <CarsCard v-for="car, index in cars" :key="index" :car="car"/>
-        </div>
-        <div class="row my-5">
-            <div class="d-flex justify-content-center">
-                <div>
-                    <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
-                        class="btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="row" v-if="cars.length > 0">
+                <CarsCard v-for="car, index in cars" :key="index" :car="car"/>
+
+                <div class="col-12 my-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
+                                class="btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        </div>
+                        <div>
+                            <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
+                                class="btn"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
-                        class="btn"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="col-12 text-center py-3 error-page" v-else>
+                <div class="my-3">
+                    <h1>No car with this brand was found</h1>
+                </div>
+                <div class="my-3">
+                    <p>We searched hig and low but couldn't find what you're looking for. Let's find a better place for you to go.</p>
+                </div>
+                <div class="my-5 d-flex justify-content-center">
+                    <div class="border-black-img">
+                        <img class="img-not-found" src="../assets/cars-not-found.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
+
+.error-page{
+    h1{
+        font-size: 3.5rem;
+    }
+    
+    p{
+        font-size: 1.5rem;
+    }
+}
+
+
+.border-black-img{
+    width: 70%;
+    border: 5px solid black;
+}
+
+.img-not-found{
+    width: 100%;
+    border: 5px solid white;
+}
 
 button {
     background-color: $my_red;
