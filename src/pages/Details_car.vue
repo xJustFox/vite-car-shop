@@ -38,8 +38,8 @@ export default {
     <div class="container">
         <div class="row my-5">
             <div class="col-12 col-md-6">
-                <div class="card h-100">
-                    <img :src="getImage()" alt="" class="img-fluid h-100">
+                <div class="card">
+                    <img :src="getImage()" alt="" class="img-card">
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -80,31 +80,6 @@ export default {
                             <span>carshop.online@gmail.com</span>
                         </div>
                     </div>
-                    <!-- <div class="contacts mt-5">
-                        <h5 class="text-center text-uppercase">Contact us</h5>
-                        <div class="d-flex justify-content-center">
-                            <button class="btn"><i class="fa-solid fa-phone"></i></button>
-                            <button class="btn ms-2"><i class="fa-solid fa-envelope"></i></button>
-                        </div>
-                    </div> -->
-                    <!-- <h4>Features:</h4>
-                    <div class="col-12">
-                        <ul class="list-unstyled d-flex justify-content-between mt-3">
-                            <li>
-                                <i class="fa-solid fa-palette"></i>
-                                Color: {{car.color}}
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-truck-pickup"></i>
-                                Engine Size: {{ car.engine_size }}
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-car-side"></i>
-                                Transmission: {{ car.transmission }}
-                            </li>
-                        </ul>
-                    </div>
-                     -->
                 </div>
             </div>
             <div class="col-12">
@@ -147,6 +122,10 @@ export default {
     @use '../style/partials/variables' as *;
     .my-grey{
         color: #b2b2b2;
+    }
+
+    .img-card {
+        box-shadow: 5px 5px 5px 5px grey;
     }
     
     .my-ul{
