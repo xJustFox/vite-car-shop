@@ -43,7 +43,7 @@ export default {
                 <div class="col-8">
                     <h4 >Facts and Figures</h4>
                     <div>
-                    AutoScout24 is the largest pan-European automotive online market. Since 1998, the online car market has offered private customers, dealers and manufacturers a comprehensive platform for trading cars online.
+                    The Car Shop is the largest pan-European automotive online market. Since 1998, the online car market has offered private customers, dealers and manufacturers a comprehensive platform for trading cars online.
                     </div>
 
                 </div>
