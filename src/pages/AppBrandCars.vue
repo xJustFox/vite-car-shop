@@ -1,12 +1,14 @@
 <script>
 import CarsCard from '../components/CarsCard.vue';
+import AppLoading from '../pages/AppLoading.vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
 export default {
     name: 'AppCars',
     components: {
-        CarsCard
+        CarsCard,
+        AppLoading
     },
     data() {
         return {
@@ -23,7 +25,7 @@ export default {
     },
     methods: {
         getCar(page) {
-            this.cars = [];
+            this.store.flagLoading = true;
             axios.get(`${this.store.baseUrl}/api/cars/brand/${this.$route.params.slug}`, {
                 params: {
                     page: page
@@ -32,6 +34,7 @@ export default {
                 this.cars = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
+                this.store.flagLoading = false;
             })
         },
         getBrands() {
@@ -46,7 +49,7 @@ export default {
 }
 </script>
 
-<template lang="">
+<template>
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-end mt-4">
@@ -62,37 +65,41 @@ export default {
                     </ul>
                 </div>
             </div>
-            <div class="row" v-if="cars.length > 0">
-                <CarsCard v-for="car, index in cars" :key="index" :car="car"/>
-
-                <div class="col-12 my-5">
-                    <div class="d-flex justify-content-center">
-                        <div>
-                            <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
-                                class="btn"><i class="fa-solid fa-chevron-left"></i></button>
+            <div v-if="!this.store.flagLoading">
+                <div class="row" v-if="cars.length > 0">
+                    <CarsCard v-for="car, index in cars" :key="index" :car="car"/>
+    
+                    <div class="col-12 my-5">
+                        <div class="d-flex justify-content-center">
+                            <div>
+                                <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
+                                    class="btn"><i class="fa-solid fa-chevron-left"></i></button>
+                            </div>
+                            <div>
+                                <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
+                                    class="btn"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
                         </div>
-                        <div>
-                            <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
-                                class="btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="col-12 text-center py-3 error-page" v-else>
+                    <div class="my-3">
+                        <h1>No car with this brand was found</h1>
+                    </div>
+                    <div class="my-3">
+                        <p>We searched hig and low but couldn't find what you're looking for. Let's find a better place for you to go.</p>
+                    </div>
+                    <div class="my-5 d-flex justify-content-center">
+                        <div class="border-black-img">
+                            <img class="img-not-found" src="../assets/cars-not-found.png" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 text-center py-3 error-page" v-else>
-                <div class="my-3">
-                    <h1>No car with this brand was found</h1>
-                </div>
-                <div class="my-3">
-                    <p>We searched hig and low but couldn't find what you're looking for. Let's find a better place for you to go.</p>
-                </div>
-                <div class="my-5 d-flex justify-content-center">
-                    <div class="border-black-img">
-                        <img class="img-not-found" src="../assets/cars-not-found.png" alt="">
-                    </div>
-                </div>
+            <div v-else>
+                <AppLoading/>
             </div>
         </div>
-        
     </div>
 </template>
 

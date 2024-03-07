@@ -1,14 +1,16 @@
 <script>
-    import CarsCard from '../components/CarsCard.vue';
-    import { store } from '../store.js';
-    import axios from 'axios';
+import CarsCard from '../components/CarsCard.vue';
+import AppLoading from '../pages/AppLoading.vue';
+import { store } from '../store.js';
+import axios from 'axios';
 
 export default {
     name: 'AppCars',
-    components:{
-        CarsCard
+    components: {
+        CarsCard,
+        AppLoading
     },
-    data(){
+    data() {
         return {
             store,
             cars: [],
@@ -21,8 +23,9 @@ export default {
         this.getCar();
         this.getBrands();
     },
-    methods:{
+    methods: {
         getCar(page) {
+            this.store.flagLoading = true;
             axios.get(`${this.store.baseUrl}/api/cars`, {
                 params: {
                     page: page
@@ -31,6 +34,7 @@ export default {
                 this.cars = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
+                this.store.flagLoading = false;
             })
         },
         getBrands() {
@@ -58,19 +62,28 @@ export default {
                     </ul>
                 </div>
             </div>
-            <CarsCard v-for="car, index in cars" :key="index" :car="car"/>
         </div>
-        <div class="row my-5">
-            <div class="d-flex justify-content-center">
-                <div>
-                    <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
-                        class="btn"><i class="fa-solid fa-chevron-left"></i></button>
-                </div>
-                <div>
-                    <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
-                        class="btn"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <div v-if="!this.store.flagLoading">
+            <div class="row" v-if="cars.length > 0">
+                <CarsCard v-for="car, index in cars" :key="index" :car="car"/>
+
+                <div class="col-12 my-5">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <button :class="currentPage == 1 ? 'disabled' : 'btn'" @click=" getCar(currentPage - 1)"
+                                class="btn"><i class="fa-solid fa-chevron-left"></i></button>
+                        </div>
+                        <div>
+                            <button :class="currentPage == lastPage ? 'disabled' : 'btn'" @click="getCar(currentPage + 1)"
+                                class="btn"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div v-else>
+            <AppLoading/>
         </div>
     </div>
 </template>
@@ -78,41 +91,41 @@ export default {
 <style lang="scss" scoped>
 @use '../style/partials/variables' as *;
 
-    button{
+button {
+    background-color: $my_red;
+    margin: 0 10px;
+
+    &:hover {
+        opacity: 0.5;
         background-color: $my_red;
-        margin: 0 10px;
-
-        &:hover{
-            opacity: 0.5;
-            background-color: $my_red;
-        }
     }
+}
 
-    .my-dropdown{
-        font-size: large;
+.my-dropdown {
+    font-size: large;
+    text-decoration: none;
+    color: black;
+    border: 1px solid $my_red;
+    border-radius: 5px;
+    padding: 5px;
+
+    &:hover {
+        color: $my_red;
+    }
+}
+
+.dropdown-menu {
+    height: 300px;
+    overflow-y: scroll;
+
+    .my-dropdown-link {
         text-decoration: none;
         color: black;
-        border: 1px solid $my_red;
-        border-radius: 5px;
-        padding: 5px;
+        padding: 0 10px;
 
-        &:hover{
+        &:hover {
             color: $my_red;
         }
     }
-
-    .dropdown-menu{
-        height: 300px;
-        overflow-y: scroll;
-
-        .my-dropdown-link{
-            text-decoration: none;
-            color: black;
-            padding: 0 10px;
-
-            &:hover{
-                color: $my_red;
-            }
-        }
-    }
+}
 </style>
