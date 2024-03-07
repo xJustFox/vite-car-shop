@@ -31,7 +31,7 @@ export default {
 
 h1{
     font-size: 90px;
-    font-weigh: 900;
+    font-weight: 900;
 }
 
 p{
