@@ -125,6 +125,7 @@ export default {
     }
 
     .img-card {
+        max-height: 600px;
         box-shadow: 5px 5px 5px 5px grey;
     }
     
