@@ -4,6 +4,7 @@ import AppHome from './pages/AppHome.vue';
 import AppCars from './pages/AppCars.vue';
 import AppBrandCars from './pages/AppBrandCars.vue';
 import AppNotFound from './pages/AppNotFound.vue';
+import AppAboutUs from './pages/AppAboutUs.vue';
 
 
 const router = createRouter({
@@ -23,6 +24,11 @@ const router = createRouter({
             path: '/cars/brand/:slug',
             name: 'brand-cars',
             component: AppBrandCars
+        },
+        {
+            path: '/about-us',
+            name: 'about-us',
+            component: AppAboutUs
         },
         {
             path: '/:patchMatch(.*)*',

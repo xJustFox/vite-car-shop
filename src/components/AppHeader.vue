@@ -14,7 +14,7 @@ export default {
                     label: 'Shop',
                 },
                 {
-                    name: '',
+                    name: 'about-us',
                     label: 'About Us',
                 },
             ],
