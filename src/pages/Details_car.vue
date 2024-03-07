@@ -81,16 +81,17 @@ export default {
                         <ul class="list-unstyled d-flex justify-content-between mt-3">
                             <li>
                                 <i class="fa-solid fa-car-side"></i>
-                                Type: {{ car.brand.car_type }}
+                                Type: <span v-if="car.brand">{{ car.brand.car_type }}</span>
+                                
                             </li>
                             <li>
                                 <i class="fa-solid fa-gas-pump"></i>
                                 Fuel Type: {{car.fuel_type}} 
                             </li>
                             <li>
-                                <div v-if="car.optional.name != null">
+                                <div v-if="car.optional != null">
                                     <i class="fa-solid fa-circle-plus"></i>
-                                    Optional: {{ car.optional.name }}        
+                                    Optional: <span class="me-2" v-for="(optional, index) in car.optional" :key="index">{{ optional.name }} </span>       
                                 </div>
                                 <div v-else>
                                     <i class="fa-solid fa-circle-plus"></i>
@@ -113,7 +114,8 @@ export default {
                 <h5>Contact us:</h5>
                 <div class="d-flex align-items-center">
                     <i class="fa-solid fa-phone me-2"></i>
-                    {{car.brand.phone_num}}
+                    
+                    <div v-if="car.brand">{{car.brand.phone_num}}</div>
                 </div>
                 <div class="d-flex align-items-center">
                     <i class="fa-solid fa-envelope me-2"></i>
